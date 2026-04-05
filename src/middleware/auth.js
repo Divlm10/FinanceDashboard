@@ -1,0 +1,26 @@
+import jwt from "jasonwebtoken";
+
+const authenticate=(req,res,next)=>{
+    const authHeader=req.headers.authorization;
+
+    if(!authHeader || !authHeader.startsWith("Bearer ")){
+        return res.status(401).json({
+            success: false,
+            message:"Access denier. No Token provided",
+        });
+    }
+    const token=authHeader.split(" ")[1];// extract token from "Bearer <token>"
+
+    try{
+        const decoded=jwt.verify(token,process.env.JWT_SECRET);
+        req.user=decoded;//attach user info(id,role) and continue
+        next();
+    }catch(err){
+        return res.status(401).json({
+            success: false,
+            message: "Invalid or expired token",
+        });
+    }
+};
+
+export default authenticate;

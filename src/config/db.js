@@ -28,13 +28,5 @@ pool.on("error", (err) => {
 });
 
 
-// Temporary connection test — we'll remove this later
-pool.query("SELECT NOW()", (err, res) => {
-  if (err) {
-    console.error("Database connection failed:", err.message);
-  } else {
-    console.log("Connected to PostgreSQL database at:", res.rows[0].now);
-  }
-});
 
 export default pool;
