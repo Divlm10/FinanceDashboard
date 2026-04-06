@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import authRoutes from "./src/routes/auth.routes.js";
 import userRoutes from "./src/routes/users.routes.js";
 import recordRoutes from "./src/routes/records.routes.js";
+import dashboardRoutes from "./src/routes/dashboard.routes.js";
 
 dotenv.config();
 
@@ -21,6 +22,7 @@ app.get("/",(req,res)=>{
 app.use("/api/auth",authRoutes);
 app.use("/api/users",userRoutes);
 app.use("/api/records",recordRoutes);
+app.use("/api/dashboard",dashboardRoutes);
 
 //404 handler
 app.use((req, res) => {
