@@ -1,11 +1,15 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import pool from "./src/config/db.js";
 
 import authRoutes from "./src/routes/auth.routes.js";
 import userRoutes from "./src/routes/users.routes.js";
 import recordRoutes from "./src/routes/records.routes.js";
 import dashboardRoutes from "./src/routes/dashboard.routes.js";
+
+import authenticate from "./src/middleware/auth.js";
+import roleGuard from "./src/middleware/roleGuard.js";
 
 dotenv.config();
 
@@ -13,6 +17,8 @@ const app=express();
 
 app.use(cors());
 app.use(express.json());
+
+
 
 app.get("/",(req,res)=>{
     res.json({message:"Finance Dashboard API runninggg"});
